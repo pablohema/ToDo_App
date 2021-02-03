@@ -79,7 +79,4 @@ dependencies {
     // RecyclerView Animator
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
 
-    // Android Material
-    implementation 'com.google.android.material:material:1.2.1'
-
 }
