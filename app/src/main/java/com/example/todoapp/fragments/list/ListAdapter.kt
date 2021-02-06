@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.data.models.Priority
 import com.example.todoapp.data.models.ToDoData
+import kotlinx.android.synthetic.main.row_layout.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
@@ -15,8 +16,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_layout, parent, false)
+
         return MyViewHolder(view)
     }
 
@@ -24,9 +29,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         return dataList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: MyViewHolder,
+        position: Int
+    ) {
         holder.itemView.title_txt.text = dataList[position].title
-        holder.itemView.description_text.text = dataList[position].description
+        holder.itemView.description_txt.text = dataList[position].description
 
         when (dataList[position].priority) {
             Priority.HIGH -> holder.itemView.priority_indicator.setCardBackgroundColor(
@@ -50,7 +58,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         }
     }
 
-    fun setData(toDoData: List<ToDoData>){
+    fun setData(
+        toDoData: List<ToDoData>
+    ) {
         this.dataList = toDoData
         notifyDataSetChanged()
     }
