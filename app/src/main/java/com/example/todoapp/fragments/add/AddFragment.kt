@@ -17,6 +17,7 @@ class AddFragment : Fragment() {
 
     private val mToDoViewModel: ToDoViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +29,8 @@ class AddFragment : Fragment() {
 
         // Set Menu
         setHasOptionsMenu(true)
+
+        view.priorities_spinner.onItemSelectedListener = mSharedViewModel.listener
 
         return view
     }
