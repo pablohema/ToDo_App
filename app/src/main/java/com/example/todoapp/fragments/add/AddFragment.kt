@@ -11,11 +11,12 @@ import com.example.todoapp.R
 import com.example.todoapp.data.models.Priority
 import com.example.todoapp.data.models.ToDoData
 import com.example.todoapp.data.viewmodel.ToDoViewModel
+import com.example.todoapp.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
 
     private val mToDoViewModel: ToDoViewModel by viewModels()
-
+    private val mSharedViewModel: SharedViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,17 +48,17 @@ class AddFragment : Fragment() {
         val mPriority = priorities_spinner.selectedItem.toString()
         val mDescription = description_et.text.toString()
 
-        val validation = verifyDataFromUser(mTitle, mDescription)
+        val validation = mSharedViewModel.verifyDataFromUser(mTitle, mDescription)
         if (validation) {
             // Insert Data to Database
             val newData = ToDoData(
                     0,
                     mTitle,
-                    parsePriority(mPriority),
+                    mSharedViewModel.parsePriority(mPriority),
                     mDescription
             )
             mToDoViewModel.insertData(newData)
-            Toast.makeText(requireContext(), "Succesfully added!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
 
             // Navigate Back
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
@@ -66,18 +67,4 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun verifyDataFromUser(title: String, description: String): Boolean {
-        return if (TextUtils.isEmpty(title) || TextUtils.isEmpty(description)) {
-            false
-        } else !(title.isEmpty() || description.isEmpty())
-    }
-
-    private fun parsePriority(priority: String): Priority {
-        return when(priority) {
-            "High priority" -> {Priority.HIGH}
-            "Medium priority" -> {Priority.MEDIUM}
-            "Low priority" -> {Priority.LOW}
-            else -> Priority.LOW
-        }
-    }
 }
