@@ -1,15 +1,14 @@
-package com.example.todoapp.fragments.list
+package com.example.todoapp.fragments.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.data.models.ToDoData
 import com.example.todoapp.databinding.RowLayoutBinding
-import kotlinx.android.synthetic.main.row_layout.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    private var dataList = emptyList<ToDoData>()
+    var dataList = emptyList<ToDoData>()
 
     class MyViewHolder(private val binding: RowLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -22,7 +21,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             fun from(parent: ViewGroup): MyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RowLayoutBinding.inflate(layoutInflater, parent, false)
-                return MyViewHolder(binding)
+                return MyViewHolder(
+                    binding
+                )
             }
         }
     }
@@ -32,7 +33,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         viewType: Int
     ): MyViewHolder {
 
-        return MyViewHolder.from(parent)
+        return MyViewHolder.from(
+            parent
+        )
     }
 
     override fun getItemCount(): Int {
